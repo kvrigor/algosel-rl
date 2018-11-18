@@ -1,0 +1,44 @@
+\chapter{Introduction}
+\section{Introduction}
+The \textit{algorithm selection} (AS) problem presents the question, "Given a set of algorithms, how to choose one that best solves a given problem?" AS is best applied in solving intractable problems, whose solutions often require brute-force or heuristic approaches. An effective method of performing AS has broad implications on solving real-world problems which often are intractable in nature.
+
+\section{Problem Background}
+A survey of AS techniques \citep{kotthoff2016algorithm} reported a majority of approaches that used supervised learning in training an AS model. Can reinforcement learning (RL) techniques be used? Recently, RL emerged as a superior approach to learning as demonstrated in applications such as automatic design of neural network architecture \citep{zoph2016neural} and board game AI exhibiting superhuman performance \citep{silver2016mastering}. This study explores the potential of RL in training AS models with superior performance. The AS models in this study focus on solving a set of hard computational tasks called subgraph isomorphism problems. This is an NP-complete problem under graph theory where the objective is to determine if a graph contains a pattern of a much smaller graph. A recent study tackled this problem by building and training an AS model using pairwise random forest regression \citep{kotthoff2016portfolios}. This study tries to improve upon the results of the previous study by proposing RL as an alternative to training AS models.
+
+\section{Problem Statement}
+This study addresses how reinforcement learning can be applied to algorithm selection for subgraph isomorphism problems. Specifically, it attempts to answer the following questions:
+\begin{itemize}
+	\item How can the algorithm selection problem be viewed from the perspective of reinforcement learning?
+	\item Can reinforcement learning be used to train an algorithm selection model in solving subgraph isomorphism problems?
+	\item Does an algorithm selection model perform better when trained using reinforcement learning as compared to supervised learning?
+\end{itemize}
+
+\section{Research Objectives}
+This study aims to use reinforcement learning in training an algorithm selection model for subgraph isomorphism problems. Specifically, it attempts to meet the following objectives:
+\begin{itemize}
+	\item To prepare the subgraph isomorphism dataset for training the algorithm selection model.
+	\item To implement a reinforcement learning algorithm for training an algorithm selection model.
+	\item To evaluate whether reinforcement learning can improve the performance of the algorithm selection model as compared to supervised learning.
+\end{itemize}
+
+\section{Scope of the Study}
+The constraints observed in this study are outlined below:
+\begin{itemize}
+	\item The AS models are trained and tested using the subgraph isomorphism dataset generated from a previous related study by Kotthoff \citep{kotthoff2016portfolios}
+	\item The characteristics of the dataset impose restrictions on how training and testing can proceed.
+	\begin{itemize}
+		\item The problems focus only on subgraph isomorphism problems.
+		\item The set of algorithms are predefined and fixed.
+		\item The model can only be trained to match one algorithm to one problem at a time.
+	\end{itemize}
+	\item Only one RL algorithm is considered in this study.
+\end{itemize}
+
+\section{Significance of the Study}
+This study contributes to the following:
+
+\begin{itemize}
+	\item Investigates the feasibility of training algorithm selection models using reinforcement learning.
+	\item Provides insights on how reinforcement learning algorithms can be applied to algorithm selection.
+	\item Introduces the potential of reinforcement learning in training effective algorithm selection models.
+\end{itemize}

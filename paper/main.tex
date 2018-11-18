@@ -1,0 +1,93 @@
+\documentclass{utmthesis}
+\usepackage{graphicx}
+\usepackage{url} 
+\usepackage[pages=some]{background}
+\usepackage{natbib}
+\usepackage{multirow}
+\usepackage{subfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tabulary}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\captionsetup{belowskip=12pt,aboveskip=4pt}
+\begin{document}
+
+% Required information
+\title{Algorithm Selection for Subgraph Isomorphism Problems:}
+\titletwo{A Reinforcement Learning Approach}
+\author{Paul Kenneth Valdez Rigor}
+\degree{Masters of Science}
+\specialization{Computer Science}
+\intakeyear{2018}
+\faculty{Faculty of Computing}
+\titledate{October 2018}
+\award{3}
+% Options for Award 
+% 1. Bachelor Degree Project Report
+% 2. Master's Project Report (By course work)
+% 3. Master's Dissertation (By course work and research)
+% 4. Master's Thesis (By research)
+% 5. Doctor of Philosophy Thesis
+% 6. Other PhD Thesis
+% 7. Generic PhD Thesis
+% 8. Thesis Proposal
+\superone{Assoc. Prof. Dr. Roliana Binti Ibrahim}
+\supertwo{Dr. Haza Nuzly Abdull Hamed}
+
+% Option for two-page printing
+\newgeometry{top=2.5cm,left=4cm,right=2.5cm,bottom=2.5cm,twoside}
+
+% Option to add watermark page
+% Comment for final version	
+\backgroundsetup{scale=1,angle=0,opacity=.1,hshift=0.25in,vshift=-0.5in,contents={\includegraphics[width=5cm]{img/utm02.jpg}}}
+\watermarkpage
+
+% Mandatory pages
+\coverpage
+\superpage
+\certification
+\frontmatter
+\maketitle
+\declaration
+
+\begin{abstract}
+A set of hard computational problems can be solved more efficiently when using multiple algorithms instead of a single algorithm. This technique is called algorithm selection. An algorithm selection model captures the relationship between problem features and algorithm performance, using this knowledge to assign the best-performing algorithms to problems. Most approaches in literature use supervised learning techniques to learn the problem feature–algorithm performance relationship. This study presents a different perspective by training algorithm selection models using reinforcement learning---an experience-driven learning approach inspired by how humans and animals naturally learn from their environment. REINFORCE, the proposed reinforcement learning algorithm, is compared with pairwise random forest regression, a supervised learning algorithm from a previously related study. Experiment results show that an algorithm selection model trained using REINFORCE performs poorly as compared to one trained using pairwise random forest regression. However, zooming into the results reveal that REINFORCE did better than pairwise random forest regression on solving the easier problems, which constitutes the majority of the dataset. Still, REINFORCE fails because it is not able to perform well on solving the much harder problems on the dataset, which have a huge impact on the final calculation of algorithm selection performance scores. Nevertheless, this study maintains hope on the potential of reinforcement learning in producing algorithm selection models with better performance than models trained using supervised learning techniques. 
+\end{abstract}
+
+\tableofcontents
+\listoftables
+\listoffigures
+
+%List of abbreviation 
+\listofabbre
+\addabbre{AS}{Algorithm Selection}
+\addabbre{ASlib}{Algorithm Selection Library}
+\addabbre{COSEAL}{Configuration and Selection of Algorithms}
+\addabbre{MCP}{Misclassification Penalty}
+\addabbre{PRFR}{Pairwise random forest regression}
+\addabbre{RL}{Reinforcement Learning}
+\addabbre{SBS}{Single Best Solver}
+\addabbre{SAT}{Satisfiability}
+\addabbre{VBS}{Virtual Best Solver}
+\addabbre{TSP}{Travelling Salesman Problem}
+\addabbre{PORTSUB}{Paper by \citet{kotthoff2016portfolios}}
+\addabbre{REINFORCE}{REward INcrement = Nonnegative Factor + Offset Reinforcement + Characteristic Eligibility}
+\addabbre{LLAMA}{Leveraging Learning to Automatically Manage Algorithms}
+
+\onehalfspacing
+\mainmatter
+
+% You can call another LaTeX document 
+\include{./tex/ch1_introduction}
+\include{./tex/ch2_literatureReview}
+\include{./tex/ch3_researchMethodology}
+\include{./tex/ch4_asModel}
+\include{./tex/ch5_experimentResults}
+\include{./tex/ch6_conclusion}
+
+\bibliographystyle{utmthesis-authordate}
+\bibliography{reference}
+
+
+\end{document}

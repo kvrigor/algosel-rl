@@ -1,0 +1,33 @@
+\chapter{Conclusion}
+\section{Summary}
+Given problem features and algorithm performance, an AS model can learn how to map problems to algorithms through supervised learning techniques, such as classification or regression algorithms. This makes sense because AS involves modelling the relationship between two variables: problem features and algorithm performance. However, it is also possible to consider an AS model as a decision-making entity: it \textit{senses} the problem features, \textit{decides} which algorithm to choose, \textit{observes} the performance of the chosen algorithm, and then \textit{updates} its decision-making behavior based on the observed response. This portrays a type of learning based on \textit{feedback} --– the core concept behind RL. Its primary advantage is that learning is not dependent on right-wrong examples explicitly labeled by a "teacher" as with supervised learning techniques; thus enabling an AS model to learn on its own based only on its observation of how algorithms behave with respect to problem features. It is more difficult to control the behavior of RL algorithms compared to supervised learning techniques, but when successful, an RL-trained AS model has far better learning generalization capability than one trained using supervised learning. Better generalization means better AS performance with previously unseen problems despite learning only from a small batch of problems.
+
+Two AS models were implemented in this study: one trained using PRFR, a supervised learning technique used on a previous AS study by \citet{kotthoff2016portfolios}, and the other trained using REINFORCE, the RL algorithm proposed in this study. The AS models were compared using mean misclassification penalty (MCP), a performance metric which reflects the additional time required in solving problems where suboptimal algorithms were selected. A mean MCP of 0 indicates that there is zero penalty in choosing a suboptimal algorithm, signifying that the best algorithm is always selected for every problem. PRFR garnered an MCP of $6.22 \times 10^5$ milliseconds while REINFORCE measured 4x as worse, with mean MCP of $2.32 \times 10^{6}$ milliseconds. On the other hand, median performance results show that REINFORCE did better than PRFR on the easier problems on the dataset, representing 75\% of the total. Still, PRFR outperformed REINFORCE because it specialized in solving the much harder problems (problems solvable within $10^5-10^8$ ms range) which have a huge impact on MCP computation, despite representing a minority on the dataset.    
+
+
+\section{Recommendations for Future Work}
+A number of modifications on the REINFORCE algorithm can be explored:
+
+\begin{itemize}
+	\item Reduce number of input features \\ \\
+	Only a handful of features might be necessary to perform effective AS. Dimensionality reduction methods (e.g. PCA, clustering) can help to reduce and simplify the problem feature space. This can assist a function approximator in focusing on few important features to learn algorithm scores.
+	
+	\item Redesign policy function and function approximator \\ \\
+	The behavior of the policy function depends on how the function approximator calibrates the algorithm scores for each problem instance. In turn, the function approximator learns the proper calibrations when the policy allows for balanced \textit{exploration} and \textit{exploitation} during AS: \textit{explore} seldomly tried algorithms to learn their performance and \textit{exploit} existing knowledge on algorithm performance to select the best algorithm.
+	
+	It is quite difficult to know which function approximation technique goes best with a given policy function (and vice versa). This can be determined through cycles of reviewing the literature to get ideas which methods might potentially work and heavy experimentation. 
+	
+	\item Reward scaling \\ \\
+	How the algorithm runtime is scaled prior to performance gradient calculation has a huge impact on the resulting performance of the AS model. Unscaled runtime values can serve enough as feedback; however, learning becomes more erratic especially when there are plenty of outliers across runtime observations. Reward scaling helps to stabilize learning. The optimum scaling method can be empirically determined, taking into consideration the characteristics of runtime data distribution and the function approximation method used.  
+	
+	\item Add regularization term to performance gradient \\ \\
+	A regularization term acts as an offset value to the performance gradient which can influence how the policy function conducts \textit{exploration} and \textit{exploitation} among available actions. Gradient regularization methods such as entropy regularization (Williams, 1992) and importance sampling (Nachum et. al., 2016) attempt to improve exploration, which helps the policy to avoid being stuck with known actions and incentivize behavior towards discovery of potentially better actions. 
+	
+	\item Implement curriculum learning \\ \\
+	A training strategy can be implemented such that problem instances are presented to the AS model in some meaningful order instead of being random. Such strategy is called \textit{curriculum learning} \citep{bengio2009curriculum}. This recommendation is based from the experiment results where REINFORCE performed well only on the easier problems but not on the harder ones. It might be possible to improve AS model performance by focusing the training on much harder problems. 	
+\end{itemize}
+
+Besides REINFORCE, there are plenty of other policy-gradient RL algorithms that can possibly be applied to AS. Another class of RL algorithms called \textit{contextual bandits} can also be explored. Contextual bandits assume a simpler model of RL where reward values are fully received for every input instead of being delayed across a series of inputs. This model can also apply to AS since algorithm performance is based only from the algorithm currently selected and not on past nor future algorithm choices.
+
+
+

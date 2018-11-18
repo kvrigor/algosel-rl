@@ -1,0 +1,74 @@
+---
+title: "GRAPHS-2015 Exploratory Data Analysis"
+nocite: |
+  @kotthoff_portfolios_2016
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+  html_notebook:
+    theme: united
+    toc: yes
+bibliography: GRAPHS-2015/citation.bib
+---
+
+## Description
+
+Displays summary statistics and plots on the [GRAPHS-2015](https://github.com/coseal/aslib_data/tree/master/GRAPHS-2015) dataset. All statistics and plotting functions used are from the [ASlib](https://www.rdocumentation.org/packages/aslib/versions/0.1) package.
+
+```{r load_dataset}
+library(aslib)
+dataset = parseASScenario("GRAPHS-2015")
+summary(dataset)
+```
+
+## Summary of features 
+```{r}
+getFeatureNames(dataset)
+summarizeFeatureValues(dataset)
+```
+
+## Summary of algorithm performance
+```{r}
+getAlgorithmNames(dataset)
+summarizeAlgoPerf(dataset) 
+```
+
+```{r}
+summarizeAlgoRunstatus(dataset)
+```
+
+
+## Algorithm performance plots
+Important note w.r.t.\ some of the following plots:
+If appropriate, we imputed performance values for failed runs.
+We used $max + 0.3 * (max - min)$, in case of minimization problems,
+or $min - 0.3 * (max - min)$, in case of maximization problems.
+
+```{r}
+plotAlgoPerfBoxplots(dataset, impute.zero.vals = TRUE, log = TRUE)
+```
+```{r}
+plotAlgoPerfDensities(dataset, impute.zero.vals = TRUE, log = TRUE)
+```
+```{r}
+plotAlgoPerfCDFs(dataset, impute.zero.vals = TRUE, log = TRUE)
+```
+```{r}
+plotAlgoPerfScatterMatrix(dataset, impute.zero.vals = TRUE, log = TRUE)
+```
+
+### Correlation matrix
+The figure showing the correlations of the ranks of the performance values shows
+the Spearman correlation coefficient. Missing values were imputed prior to
+computing the correlation coefficients. The algorithms are ordered in a way that
+similar (highly correlated) algorithms are close to each other. Per default the
+clustering is based on hierarchical clustering, using Ward's method.
+```{r}
+plotAlgoCorMatrix(dataset)
+```
+
+## References
+[Source Rmd file](https://github.com/kvrigor/algosel-rl/blob/master/ntbk_eda_graphs2015.Rmd)
+
+[GRAPHS-2015 EDA original source](https://github.com/ciaranm/lion2016-sip-portfolios-paper/blob/master/portfolio/as-graphs.Rnw)
